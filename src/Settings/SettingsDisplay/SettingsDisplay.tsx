@@ -1,21 +1,38 @@
 import cn from './SettingsDisplay.module.css';
+import {type ChangeEvent} from "react";
 
 type Props = {
-    maxValue: number;
-    startValue: number;
+    maxValue: number
+    startValue: number
+    changeMaxValue: (newValue: number) => void
+    changeStartValue: (newValue: number) => void
 }
 
-export const SettingsDisplay = ({ maxValue, startValue }: Props) => {
+export const SettingsDisplay = (
+    {
+        maxValue,
+        startValue,
+        changeMaxValue,
+        changeStartValue
+    }: Props) => {
+
+    const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        changeMaxValue(Number(e.currentTarget.value));
+    }
+
+    const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+        changeStartValue(Number(e.currentTarget.value));
+    }
 
     return (
         <div className={cn.settingsDisplay}>
             <div className={cn.input}>
                 <label htmlFor={'max'}>max value:</label>
-                <input value={maxValue} id={'max'}/>
+                <input type={'number'} value={maxValue} onChange={onChangeMaxValue} id={'max'}/>
             </div>
             <div className={cn.input}>
                 <label htmlFor={'start'}>start value:</label>
-                <input value={startValue} id={'start'}/>
+                <input type={'number'} value={startValue} onChange={onChangeStartValue} id={'start'}/>
             </div>
         </div>
     );
