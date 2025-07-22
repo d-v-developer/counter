@@ -9,6 +9,9 @@ type Props = {
     changeStartValue: (newValue: number) => void
     applySetting: () => void
     editMode: boolean
+    errorStartValue: boolean
+    errorMaxValue: boolean
+    errorEditMode: boolean
 }
 
 export const Settings = (
@@ -19,6 +22,9 @@ export const Settings = (
         changeStartValue,
         applySetting,
         editMode,
+        errorStartValue,
+        errorMaxValue,
+        errorEditMode
     }: Props) => {
 
     const onClickSetHandler = () => {
@@ -32,9 +38,11 @@ export const Settings = (
                 startValue={startValue}
                 changeMaxValue={changeMaxValue}
                 changeStartValue={changeStartValue}
+                errorStartValue={errorStartValue}
+                errorMaxValue={errorMaxValue}
             />
             <div className={cn.buttons}>
-                <Button title={'set'} callback={onClickSetHandler} disabled={!editMode}/>
+                <Button title={'set'} callback={onClickSetHandler} disabled={!editMode || errorEditMode}/>
             </div>
         </div>
     );

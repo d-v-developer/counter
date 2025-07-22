@@ -9,13 +9,18 @@ export function App() {
     const [startValue, setStartValue] = useState(2);
     const [editMode, setEditMode] = useState(false);
 
+    const errorStartValue = startValue < 0 || startValue >= maxValue;
+    const errorMaxValue = maxValue < 0 || maxValue <= startValue;
+    const errorEditMode = errorStartValue || errorMaxValue;
+
     const changeMaxValue = (newValue: number) => {
         setMaxValue(newValue);
         if (!editMode) setEditMode(true);
     }
 
     const changeStartValue = (newValue: number) => {
-        setStartValue(newValue);
+        setStartValue(newValue)
+
         if (!editMode) setEditMode(true);
     }
 
@@ -34,10 +39,15 @@ export function App() {
                 changeStartValue={changeStartValue}
                 applySetting={applySetting}
                 editMode={editMode}
+                errorStartValue={errorStartValue}
+                errorMaxValue={errorMaxValue}
+                errorEditMode={errorEditMode}
             />
             <Counter
-                maxValue={5}
-                startValue={2}/>
+                maxValue={maxValue}
+                startValue={startValue}
+                editMode={editMode}
+                errorEditMode={errorEditMode}/>
         </div>
     )
 }

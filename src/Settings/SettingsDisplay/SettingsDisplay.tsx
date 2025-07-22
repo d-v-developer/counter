@@ -6,14 +6,19 @@ type Props = {
     startValue: number
     changeMaxValue: (newValue: number) => void
     changeStartValue: (newValue: number) => void
+    errorStartValue: boolean
+    errorMaxValue: boolean
 }
+
 
 export const SettingsDisplay = (
     {
         maxValue,
         startValue,
         changeMaxValue,
-        changeStartValue
+        changeStartValue,
+        errorStartValue,
+        errorMaxValue,
     }: Props) => {
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,11 +33,23 @@ export const SettingsDisplay = (
         <div className={cn.settingsDisplay}>
             <div className={cn.input}>
                 <label htmlFor={'max'}>max value:</label>
-                <input type={'number'} value={maxValue} onChange={onChangeMaxValue} id={'max'}/>
+                <input
+                    id={'max'}
+                    type={'number'}
+                    value={maxValue}
+                    onChange={onChangeMaxValue}
+                    className={errorMaxValue ? cn.inputError : cn.inputWithoutError}
+                />
             </div>
             <div className={cn.input}>
                 <label htmlFor={'start'}>start value:</label>
-                <input type={'number'} value={startValue} onChange={onChangeStartValue} id={'start'}/>
+                <input
+                    id={'start'}
+                    type={'number'}
+                    value={startValue}
+                    onChange={onChangeStartValue}
+                    className={errorStartValue ? cn.inputError : cn.inputWithoutError}
+                />
             </div>
         </div>
     );

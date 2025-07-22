@@ -28,5 +28,13 @@
     font-size: 0.8em;
     font-weight: bold;
     text-align: center;
+}
+
+.inputWithoutError {
     border: 3px solid var(--main-color);
+}
+
+.inputError {
+    border: 3px solid var(--error-color);
+    background-color: var(--error-color);
 }

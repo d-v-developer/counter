@@ -6,9 +6,11 @@ import {useState} from "react";
 type Props = {
     maxValue: number;
     startValue: number;
+    editMode: boolean;
+    errorEditMode: boolean;
 }
 
-export const Counter = ({ maxValue, startValue }: Props) => {
+export const Counter = ({ maxValue, startValue, editMode, errorEditMode }: Props) => {
 
     const [counter, setCounter] = useState(startValue);
     const [isError, setIsError] = useState(false);
@@ -28,10 +30,10 @@ export const Counter = ({ maxValue, startValue }: Props) => {
 
     return (
         <div className={cn['counter']}>
-            <CounterDisplay value={counter} isError={isError}/>
+            <CounterDisplay value={counter} isError={isError} editMode={editMode} errorEditMode={errorEditMode}/>
             <div className={cn['buttons']}>
-                <Button title={"inc"} callback={onClickButtonIncHandler} disabled={isError}/>
-                <Button title={"reset"} callback={onClickButtonResetHandler}/>
+                <Button title={"inc"} callback={onClickButtonIncHandler} disabled={editMode ? editMode : isError}/>
+                <Button title={"reset"} callback={onClickButtonResetHandler} disabled={editMode}/>
             </div>
         </div>
 
