@@ -30,7 +30,7 @@ export const Counter = ({ maxValue, startValue }: Props) => {
         <div className={cn['counter']}>
             <CounterDisplay value={counter} isError={isError}/>
             <div className={cn['buttons']}>
-                <Button title={"inc"} callback={onClickButtonIncHandler} isError={isError}/>
+                <Button title={"inc"} callback={onClickButtonIncHandler} disabled={isError}/>
                 <Button title={"reset"} callback={onClickButtonResetHandler}/>
             </div>
         </div>

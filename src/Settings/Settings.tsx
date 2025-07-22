@@ -34,7 +34,7 @@ export const Settings = (
                 changeStartValue={changeStartValue}
             />
             <div className={cn.buttons}>
-                <Button title={'set'} callback={onClickSetHandler}/>
+                <Button title={'set'} callback={onClickSetHandler} disabled={!editMode}/>
             </div>
         </div>
     );
