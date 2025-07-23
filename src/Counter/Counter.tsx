@@ -1,7 +1,7 @@
 import {Button} from "../Button/Button.tsx";
 import {CounterDisplay} from "./CounterDisplay/CounterDisplay.tsx";
 import cn from './Counter.module.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 type Props = {
     maxValue: number;
@@ -14,6 +14,14 @@ export const Counter = ({ maxValue, startValue, editMode, errorEditMode }: Props
 
     const [counter, setCounter] = useState(startValue);
     const [isError, setIsError] = useState(false);
+
+    useEffect(() => {
+        if (!editMode) {
+            setCounter(startValue);
+            setIsError(false);
+        }
+
+    }, [startValue, editMode]);
 
     const onClickButtonIncHandler = () => {
         setCounter(prev => {

@@ -5,8 +5,11 @@ import {useState} from "react";
 
 export function App() {
 
-    const [maxValue, setMaxValue] = useState(7);
-    const [startValue, setStartValue] = useState(2);
+    const INITIAL_START_VALUE = 4;
+    const INITIAL_MAX_VALUE = 7;
+
+    const [maxValue, setMaxValue] = useState(INITIAL_MAX_VALUE);
+    const [startValue, setStartValue] = useState(INITIAL_START_VALUE);
     const [editMode, setEditMode] = useState(false);
 
     const errorStartValue = startValue < 0 || startValue >= maxValue;
@@ -47,7 +50,8 @@ export function App() {
                 maxValue={maxValue}
                 startValue={startValue}
                 editMode={editMode}
-                errorEditMode={errorEditMode}/>
+                errorEditMode={errorEditMode}
+            />
         </div>
     )
 }
