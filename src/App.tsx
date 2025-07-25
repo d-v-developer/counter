@@ -1,16 +1,24 @@
 import './App.css'
 import {Counter} from "./Counter/Counter.tsx";
 import {Settings} from "./Settings/Settings.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export function App() {
 
-    const INITIAL_START_VALUE = 4;
-    const INITIAL_MAX_VALUE = 7;
-
-    const [maxValue, setMaxValue] = useState(INITIAL_MAX_VALUE);
-    const [startValue, setStartValue] = useState(INITIAL_START_VALUE);
+    const [maxValue, setMaxValue] = useState(1);
+    const [startValue, setStartValue] = useState(0);
     const [editMode, setEditMode] = useState(false);
+
+    useEffect(() => {
+        const startValue = localStorage.getItem('INITIAL_START_VALUE')
+        if (startValue) {
+            setStartValue(parseInt(startValue));
+        }
+        const maxValue = localStorage.getItem('INITIAL_MAX_VALUE')
+        if (maxValue) {
+            setMaxValue(parseInt(maxValue));
+        }
+    }, []);
 
     const errorStartValue = startValue < 0 || startValue >= maxValue;
     const errorMaxValue = maxValue < 0 || maxValue <= startValue;
@@ -29,6 +37,8 @@ export function App() {
 
     const applySetting = () => {
         //1. поместить в LocalStorage
+        localStorage.setItem('INITIAL_START_VALUE', JSON.stringify(startValue))
+        localStorage.setItem('INITIAL_MAX_VALUE', JSON.stringify(maxValue))
         //2. Выйти из EditMode
         setEditMode(false);
     }
